@@ -13,7 +13,6 @@ import TaskIcon from "@mui/icons-material/Task";
 const HeaderComponent = () => {
   return (
     <Stack
-      width={"100%"}
       bgcolor={"primary.main"}
       height={80}
       direction={"row"}
