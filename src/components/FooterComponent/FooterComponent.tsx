@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { Box, Button, Stack, Typography, Menu, MenuItem } from "@mui/material/";
+import { Button, Stack, Typography, Menu, MenuItem } from "@mui/material/";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import IconButton from "@mui/material/IconButton";
+import { useTranslation } from "react-i18next";
 
 const options = ["Русский", "English"];
-
 const ITEM_HEIGHT = 48;
 
 const FooterComponent = () => {
+  const { i18n } = useTranslation();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [currentLanguage, setCurrentLanguage] = useState<string>("Русский");
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
   const selectLanguage = (option: string) => {
-    setCurrentLanguage(option);
+    i18n.changeLanguage(option === "Русский" ? "ru" : "en");
     setAnchorEl(null);
   };
 
@@ -41,7 +42,7 @@ const FooterComponent = () => {
           onClick={handleClick}
           endIcon={<KeyboardArrowDownIcon />}
         >
-          {currentLanguage}
+          {i18n.language === "ru" ? "Русский" : "English"}
         </Button>
         <Menu
           id="long-menu"

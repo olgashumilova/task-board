@@ -1,10 +1,5 @@
-import React from "react";
-import logo from "./logo.svg";
-
 import theme from "./provider/theme";
 import { ThemeProvider } from "@mui/material/styles";
-
-import { Box, Paper, Typography } from "@mui/material/";
 
 import HomePage from "./pages/HomePage/HomePage";
 import LandingPage from "./pages/LandingPage/LandindPage";
@@ -18,7 +13,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <HeaderComponent />
       {isUserLoggedIn ? <HomePage /> : <LandingPage />}
-
       <FooterComponent />
     </ThemeProvider>
   );

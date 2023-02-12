@@ -1,16 +1,10 @@
-import {
-  Box,
-  Paper,
-  Typography,
-  Divider,
-  Container,
-  Button,
-  Link,
-  Stack,
-} from "@mui/material";
+import { Typography, Divider, Button, Link, Stack } from "@mui/material";
 import TaskIcon from "@mui/icons-material/Task";
+import { useTranslation } from "react-i18next";
 
 const HeaderComponent = () => {
+  const { t } = useTranslation();
+
   return (
     <Stack
       bgcolor={"primary.main"}
@@ -53,13 +47,13 @@ const HeaderComponent = () => {
       <Stack width={"100%"} direction="row" justifyContent={"space-between"}>
         <Stack direction="row" spacing={4} alignItems={"center"}>
           <Link href="#" underline="hover" color={"primary.contrastText"}>
-            Главная
+            {t("header.home")}
           </Link>
           <Link href="#" underline="hover" color={"primary.contrastText"}>
-            Возможности
+            {t("header.features")}
           </Link>
           <Link href="#" underline="hover" color={"primary.contrastText"}>
-            О нас
+            {t("header.about")}
           </Link>
         </Stack>
         <Stack
@@ -69,10 +63,10 @@ const HeaderComponent = () => {
           marginRight={8}
         >
           <Button variant="text">
-            <Typography color={"white"}>Войти</Typography>
+            <Typography color={"white"}>{t("header.signIn")}</Typography>
           </Button>
           <Button variant="contained" color="success">
-            Зарегистрироваться
+            {t("header.signUp")}
           </Button>
         </Stack>
       </Stack>
