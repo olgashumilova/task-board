@@ -1,6 +1,7 @@
 import { Typography, Divider, Button, Link, Stack } from "@mui/material";
 import TaskIcon from "@mui/icons-material/Task";
 import { useTranslation } from "react-i18next";
+import { ROUTES } from "../../routes";
 
 const HeaderComponent = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const HeaderComponent = () => {
       paddingLeft={4}
     >
       <Link
-        href="#"
+        href={ROUTES.HOME}
         underline={"none"}
         color={"primary.contrastText"}
         marginRight={8}
@@ -46,13 +47,25 @@ const HeaderComponent = () => {
 
       <Stack width={"100%"} direction="row" justifyContent={"space-between"}>
         <Stack direction="row" spacing={4} alignItems={"center"}>
-          <Link href="#" underline="hover" color={"primary.contrastText"}>
+          <Link
+            href={ROUTES.HOME}
+            underline="hover"
+            color={"primary.contrastText"}
+          >
             {t("header.home")}
           </Link>
-          <Link href="#" underline="hover" color={"primary.contrastText"}>
+          <Link
+            href={ROUTES.FEATURES}
+            underline="hover"
+            color={"primary.contrastText"}
+          >
             {t("header.features")}
           </Link>
-          <Link href="#" underline="hover" color={"primary.contrastText"}>
+          <Link
+            href={ROUTES.ABOUT}
+            underline="hover"
+            color={"primary.contrastText"}
+          >
             {t("header.about")}
           </Link>
         </Stack>
