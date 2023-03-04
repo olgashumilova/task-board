@@ -27,29 +27,35 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {!(window.location.href.indexOf(ROUTES.SIGNUP) !== -1) ? (
-        <HeaderComponent />
-      ) : null}
-      <Router>
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"space-between"}
-          minHeight={"100vh"}
-        >
-          <Routes>
-            <Route
-              path={ROUTES.HOME}
-              element={isUserLoggedIn ? <HomePage /> : <LandingPage />}
-            />
-            <Route path={ROUTES.FEATURES} element={<FeaturesPage />} />
-            <Route path={ROUTES.ABOUT} element={<AboutPage />} />
-            <Route path={ROUTES.SIGNIN} element={<SignUpPage />} />
-            <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
-          </Routes>
-          <FooterComponent />
-        </Box>
-      </Router>
+      {!Object.values(ROUTES).includes(window.location.pathname) ? (
+        <ErrorPage />
+      ) : (
+        <>
+          {!(window.location.href.indexOf(ROUTES.SIGNUP) !== -1) ? (
+            <HeaderComponent />
+          ) : null}
+          <Router>
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              justifyContent={"space-between"}
+              minHeight={"100vh"}
+            >
+              <Routes>
+                <Route
+                  path={ROUTES.HOME}
+                  element={isUserLoggedIn ? <HomePage /> : <LandingPage />}
+                />
+                <Route path={ROUTES.FEATURES} element={<FeaturesPage />} />
+                <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+                <Route path={ROUTES.SIGNIN} element={<SignUpPage />} />
+                <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
+              </Routes>
+              <FooterComponent />
+            </Box>
+          </Router>
+        </>
+      )}
     </ThemeProvider>
   );
 }
