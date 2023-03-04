@@ -75,10 +75,10 @@ const HeaderComponent = () => {
           spacing={2}
           marginRight={8}
         >
-          <Button variant="text">
+          <Button variant="text" href={ROUTES.SIGNIN}>
             <Typography color={"white"}>{t("header.signIn")}</Typography>
           </Button>
-          <Button variant="contained" color="success">
+          <Button variant="contained" color="success" href={ROUTES.SIGNUP}>
             {t("header.signUp")}
           </Button>
         </Stack>
