@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import * as yup from "yup";
 import axios from "axios";
-import { Box, Button, Input, Stack, Typography, Modal } from "@mui/material/";
+import {
+  Box,
+  Button,
+  Stack,
+  Typography,
+  Modal,
+  TextField,
+} from "@mui/material/";
 import landingImage from "../../assets/landing-image.svg";
 import { useTranslation } from "react-i18next";
+import { useFormik } from "formik";
 import { getHelpEmail } from "../../api/api";
 
 const styles = {
@@ -27,26 +36,39 @@ const styles = {
   },
 };
 
+const validationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+});
+
 const LandingPage = () => {
   const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
-  const [email, setEmail] = useState("");
   const [modalResponse, setModalResponse] = useState("");
 
-  const handleOpen = async () => {
-    if (email !== "") {
+  const handleOpen = async (email: any) => {
+    if (!(formik.touched.email && Boolean(formik.errors.email))) {
       const response = await axios.post(getHelpEmail, { email });
       setModalResponse(response.data);
       setOpen(response.data !== "");
-      console.log(response);
-      console.log(email);
     }
   };
   const handleClose = () => {
-    setEmail("");
     setOpen(false);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      handleOpen(values.email);
+    },
+  });
 
   return (
     <Stack direction="row" padding={8}>
@@ -62,14 +84,26 @@ const LandingPage = () => {
           <Typography variant="h5" color={"#00433B"}>
             {t("landingPage.formTitle")}
           </Typography>
-          <Input
-            placeholder="example@mail.com"
-            onChange={(event) => setEmail(event.target.value)}
-            value={email}
-          />
-          <Button variant="contained" color="success" onClick={handleOpen}>
-            {t("landingPage.formButton")}
-          </Button>
+
+          <form onSubmit={formik.handleSubmit}>
+            <Stack height={"8rem"} justifyContent={"space-between"}>
+              <TextField
+                fullWidth
+                id="email"
+                name="email"
+                label="Электронная почта"
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                placeholder={"example@mail.com"}
+              />
+
+              <Button variant="contained" color="success" type="submit">
+                {t("landingPage.formButton")}
+              </Button>
+            </Stack>
+          </form>
 
           <Modal open={open} onClose={handleClose}>
             <Box sx={styles.modal}>
