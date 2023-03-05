@@ -9,7 +9,7 @@ const styles = {
   titleContainer: {
     backgroundColor: "rgba(146, 227, 169, 0.6)",
     boxShadow: "0px 5px 34px 43px rgba(146, 227, 169, 0.6)",
-    width: "90%",
+    width: "100%",
   },
   modal: {
     position: "absolute" as "absolute",
