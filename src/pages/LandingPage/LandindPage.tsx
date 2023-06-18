@@ -1,6 +1,3 @@
-import { useState } from "react";
-import * as yup from "yup";
-import axios from "axios";
 import {
   Box,
   Button,
@@ -11,8 +8,7 @@ import {
 } from "@mui/material/";
 import landingImage from "../../assets/landing-image.svg";
 import { useTranslation } from "react-i18next";
-import { useFormik } from "formik";
-import { getHelpEmail } from "../../api/api";
+import { useLandingPage } from "./useLandingPage";
 
 const styles = {
   titleContainer: {
@@ -36,39 +32,10 @@ const styles = {
   },
 };
 
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-});
-
 const LandingPage = () => {
   const { t } = useTranslation();
 
-  const [open, setOpen] = useState(false);
-  const [modalResponse, setModalResponse] = useState("");
-
-  const handleOpen = async (email: any) => {
-    if (!(formik.touched.email && Boolean(formik.errors.email))) {
-      const response = await axios.post(getHelpEmail, { email });
-      setModalResponse(response.data);
-      setOpen(response.data !== "");
-    }
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      handleOpen(values.email);
-    },
-  });
+  const { open, modalResponse, handleClose, formik } = useLandingPage();
 
   return (
     <Stack direction="row" padding={8}>

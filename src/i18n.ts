@@ -2,6 +2,9 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
+import LandingPageEn from "./language/LandingPage/en.json";
+import HeaderEn from "./language/Header/en.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -27,20 +30,8 @@ i18n
       },
       en: {
         translation: {
-          landingPage: {
-            title: "Manage your ideas!",
-            description:
-              "TaskBoard - is a simple and convenient tool for creating tasboards",
-            formTitle: "Do you want to get more information?",
-            formButton: "Send",
-          },
-          header: {
-            home: "Home",
-            features: "Features",
-            about: "About",
-            signIn: "Sign In",
-            signUp: "Sign Up",
-          },
+          landingPage: LandingPageEn,
+          header: HeaderEn,
         },
       },
     },

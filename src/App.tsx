@@ -15,6 +15,7 @@ import LandingPage from "./pages/LandingPage/LandindPage";
 import FeaturesPage from "./pages/FeaturesPage/FeaturesPage";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
+import SignInPage from "./pages/SignInPage/SignInPage";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 import HeaderComponent from "./components/HeaderComponent/HeaderComponent";
@@ -48,7 +49,7 @@ function App() {
                 />
                 <Route path={ROUTES.FEATURES} element={<FeaturesPage />} />
                 <Route path={ROUTES.ABOUT} element={<AboutPage />} />
-                <Route path={ROUTES.SIGNIN} element={<SignUpPage />} />
+                <Route path={ROUTES.SIGNIN} element={<SignInPage />} />
                 <Route path={ROUTES.SIGNUP} element={<SignUpPage />} />
               </Routes>
               <FooterComponent />
