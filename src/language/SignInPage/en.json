@@ -1,0 +1,12 @@
+{
+  "title": "Sign in",
+  "email": "Email",
+  "password": "Password",
+  "button": "Sign in",
+  "error": {
+    "invalidEmail": "Enter a valid email",
+    "emptyEmail": "Email is required",
+    "shortPassword": "Password should be of minimum 8 characters length",
+    "emptyPassword": "Password is required"
+  }
+}

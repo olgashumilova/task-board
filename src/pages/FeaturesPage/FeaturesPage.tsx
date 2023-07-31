@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material/";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTranslation } from "react-i18next";
 import createYourBoardIcon from "../../assets/create-your-board-icon.svg";
 import addTasksIcon from "../../assets/add-tasks-icon.svg";
 import manageYourIdeasIcon from "../../assets/manage-your-ideas-icon.svg";
@@ -16,15 +17,15 @@ const styles = {
 };
 
 const FeaturesPage = () => {
+  const { t } = useTranslation();
   const isLargerThan640 = useMediaQuery("(min-width:640px)");
 
   return (
     <Stack spacing={4} padding={4}>
       <Stack mb={8} spacing={2}>
-        <Typography fontSize={"3rem"}>Возможности TaskBoard</Typography>
+        <Typography fontSize={"3rem"}>{t("featuresPage.title")}</Typography>
         <Typography fontSize={"1.5rem"} color={"#00433B"}>
-          TaskBoard - это простой и удобный инструмент для создания досок с
-          задачами
+          {t("featuresPage.subtitle")}
         </Typography>
       </Stack>
       <Stack
@@ -36,19 +37,19 @@ const FeaturesPage = () => {
         <Stack style={styles.featureContainer}>
           <img src={createYourBoardIcon} width={100}></img>
           <Typography mt={4} textAlign={"center"}>
-            Создавайте свои доски
+            {t("featuresPage.createBoxText")}
           </Typography>
         </Stack>
         <Stack style={styles.featureContainer}>
           <img src={addTasksIcon} width={100}></img>
           <Typography mt={4} textAlign={"center"}>
-            Добавляйте задачи
+            {t("featuresPage.addBoxText")}
           </Typography>
         </Stack>
         <Stack style={styles.featureContainer}>
           <img src={manageYourIdeasIcon} width={100}></img>
           <Typography mt={4} textAlign={"center"}>
-            Управляйте своими идеями
+            {t("featuresPage.manageBoxText")}
           </Typography>
         </Stack>
       </Stack>

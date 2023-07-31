@@ -1,29 +1,13 @@
 import * as yup from "yup";
 import { Stack, TextField, Button, Typography, Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useSignInPage } from "./useSignInPage";
 import { useFormik } from "formik";
 
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
-});
-
 const SignInPage = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const { t } = useTranslation();
+
+  const { formik } = useSignInPage();
 
   return (
     <Stack alignItems="center" paddingTop={16} paddingBottom={10}>
@@ -31,13 +15,13 @@ const SignInPage = () => {
         <form onSubmit={formik.handleSubmit}>
           <Stack spacing={4}>
             <Typography variant="h5" textAlign={"center"}>
-              Вход
+              {t("signInPage.title")}
             </Typography>
             <TextField
               fullWidth
               id="email"
               name="email"
-              label="Электронная почта"
+              label={t("signInPage.email")}
               value={formik.values.email}
               onChange={formik.handleChange}
               error={formik.touched.email && Boolean(formik.errors.email)}
@@ -47,7 +31,7 @@ const SignInPage = () => {
               fullWidth
               id="password"
               name="password"
-              label="Пароль"
+              label={t("signInPage.password")}
               type="password"
               value={formik.values.password}
               onChange={formik.handleChange}
@@ -55,7 +39,7 @@ const SignInPage = () => {
               helperText={formik.touched.password && formik.errors.password}
             />
             <Button color="primary" variant="contained" fullWidth type="submit">
-              Войти
+              {t("signInPage.button")}
             </Button>
           </Stack>
         </form>
