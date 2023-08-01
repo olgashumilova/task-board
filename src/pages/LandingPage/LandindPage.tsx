@@ -34,7 +34,6 @@ const styles = {
 
 const LandingPage = () => {
   const { t } = useTranslation();
-
   const { open, modalResponse, handleClose, formik } = useLandingPage();
 
   return (

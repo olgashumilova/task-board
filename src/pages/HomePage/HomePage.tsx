@@ -10,7 +10,12 @@ const HomePage = () => {
   const isTaskBoardEmpty = false;
 
   return (
-    <Stack direction="row" spacing={4} padding={4}>
+    <Stack
+      direction="row"
+      justifyContent={"space-around"}
+      spacing={4}
+      padding={4}
+    >
       <Stack mb={8} spacing={2}>
         <Typography fontSize={"2rem"}>Добро пожаловать в TaskBoard!</Typography>
         {isTaskBoardEmpty ? (
@@ -25,12 +30,12 @@ const HomePage = () => {
         ) : (
           <>
             <Typography fontSize={"1.5rem"} color={"#00433B"}>
-              Ваши доски
+              Ваши доски:
             </Typography>
           </>
         )}
       </Stack>
-      <Box position={"absolute"} top={"5rem"} right={0}>
+      <Box>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <DateCalendar readOnly />
         </LocalizationProvider>

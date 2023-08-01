@@ -1,12 +1,9 @@
-import * as yup from "yup";
 import { Stack, TextField, Button, Typography, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSignInPage } from "./useSignInPage";
-import { useFormik } from "formik";
 
 const SignInPage = () => {
   const { t } = useTranslation();
-
   const { formik } = useSignInPage();
 
   return (

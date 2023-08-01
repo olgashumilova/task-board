@@ -1,37 +1,9 @@
-import * as yup from "yup";
-import { Stack, TextField, Button, Typography, Box } from "@mui/material";
-import { useFormik } from "formik";
+import { Stack, TextField, Button, Typography, Box } from "@mui/material/";
 import { ROUTES } from "../../routes";
-
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email("Enter a valid email")
-    .required("Email is required"),
-  password: yup
-    .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .required("Password is required"),
-  repetPassword: yup
-    .string()
-    .min(8, "Password should be of minimum 8 characters length")
-    .oneOf([yup.ref("password"), ""], "Passwords must match")
-    .required("Password is required"),
-});
+import { useSignUpPage } from "./useSignUpPage";
 
 const SignUpPage = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-      repeatPassword: "",
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const { formik } = useSignUpPage();
 
   return (
     <>
@@ -39,7 +11,7 @@ const SignUpPage = () => {
         На главную
       </Button>
       <Stack alignItems="center" paddingTop={16} paddingBottom={10}>
-        <Box minWidth={"30%"}>
+        <Box minWidth={"300px"}>
           <form onSubmit={formik.handleSubmit}>
             <Stack spacing={4}>
               <Typography variant="h5" textAlign={"center"}>
