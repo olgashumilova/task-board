@@ -23,7 +23,7 @@ const FeaturesPage = () => {
   return (
     <Stack spacing={4} padding={4}>
       <Stack mb={8} spacing={2}>
-        <Typography fontSize={"3rem"}>{t("featuresPage.title")}</Typography>
+        <Typography fontSize={"2rem"}>{t("featuresPage.title")}</Typography>
         <Typography fontSize={"1.5rem"} color={"#00433B"}>
           {t("featuresPage.subtitle")}
         </Typography>
