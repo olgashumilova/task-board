@@ -1,10 +1,19 @@
-import { Typography, Divider, Button, Link, Stack } from "@mui/material";
+import {
+  Typography,
+  Divider,
+  Button,
+  Link,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import TaskIcon from "@mui/icons-material/Task";
 import { useTranslation } from "react-i18next";
 import { ROUTES } from "../../routes";
+import HeaderMenu from "./HeaderMenu";
 
 const HeaderComponent = () => {
   const { t } = useTranslation();
+  const isSmallerThan940 = useMediaQuery("(max-width:940px)");
 
   return (
     <Stack
@@ -12,7 +21,9 @@ const HeaderComponent = () => {
       height={80}
       direction={"row"}
       alignItems={"center"}
+      justifyContent={isSmallerThan940 ? "space-between" : "center"}
       paddingLeft={4}
+      paddingRight={4}
     >
       <Link
         href={ROUTES.HOME}
@@ -44,45 +55,48 @@ const HeaderComponent = () => {
           </Stack>
         </Stack>
       </Link>
-
-      <Stack width={"100%"} direction="row" justifyContent={"space-between"}>
-        <Stack direction="row" spacing={4} alignItems={"center"}>
-          <Link
-            href={ROUTES.HOME}
-            underline="hover"
-            color={"primary.contrastText"}
+      {isSmallerThan940 ? (
+        <HeaderMenu />
+      ) : (
+        <Stack width={"100%"} direction="row" justifyContent={"space-between"}>
+          <Stack direction="row" spacing={4} alignItems={"center"}>
+            <Link
+              href={ROUTES.HOME}
+              underline="hover"
+              color={"primary.contrastText"}
+            >
+              {t("header.home")}
+            </Link>
+            <Link
+              href={ROUTES.FEATURES}
+              underline="hover"
+              color={"primary.contrastText"}
+            >
+              {t("header.features")}
+            </Link>
+            <Link
+              href={ROUTES.ABOUT}
+              underline="hover"
+              color={"primary.contrastText"}
+            >
+              {t("header.about")}
+            </Link>
+          </Stack>
+          <Stack
+            direction="row"
+            divider={<Divider orientation="vertical" flexItem color="white" />}
+            spacing={2}
+            marginRight={8}
           >
-            {t("header.home")}
-          </Link>
-          <Link
-            href={ROUTES.FEATURES}
-            underline="hover"
-            color={"primary.contrastText"}
-          >
-            {t("header.features")}
-          </Link>
-          <Link
-            href={ROUTES.ABOUT}
-            underline="hover"
-            color={"primary.contrastText"}
-          >
-            {t("header.about")}
-          </Link>
+            <Button variant="text" href={ROUTES.SIGNIN}>
+              <Typography color={"white"}>{t("header.signIn")}</Typography>
+            </Button>
+            <Button variant="contained" color="success" href={ROUTES.SIGNUP}>
+              {t("header.signUp")}
+            </Button>
+          </Stack>
         </Stack>
-        <Stack
-          direction="row"
-          divider={<Divider orientation="vertical" flexItem color="white" />}
-          spacing={2}
-          marginRight={8}
-        >
-          <Button variant="text" href={ROUTES.SIGNIN}>
-            <Typography color={"white"}>{t("header.signIn")}</Typography>
-          </Button>
-          <Button variant="contained" color="success" href={ROUTES.SIGNUP}>
-            {t("header.signUp")}
-          </Button>
-        </Stack>
-      </Stack>
+      )}
     </Stack>
   );
 };

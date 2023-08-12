@@ -3,7 +3,7 @@ import { ROUTES } from "../../routes";
 import { useSignUpPage } from "./useSignUpPage";
 
 const SignUpPage = () => {
-  const { formik } = useSignUpPage();
+  const { formik, errorMessage } = useSignUpPage();
 
   return (
     <>
@@ -56,6 +56,13 @@ const SignUpPage = () => {
                   formik.touched.repeatPassword && formik.errors.repeatPassword
                 }
               />
+              {errorMessage && (
+                <Box borderRadius={2} bgcolor={"#ffe6e6"} width={"100%"}>
+                  <Typography color="red" paddingLeft={2}>
+                    {errorMessage}
+                  </Typography>
+                </Box>
+              )}
               <Button
                 color="primary"
                 variant="contained"

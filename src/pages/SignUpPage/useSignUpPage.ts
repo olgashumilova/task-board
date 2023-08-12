@@ -17,7 +17,6 @@ export const useSignUpPage = () => {
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
-  console.log("errorMessage", errorMessage);
 
   const validationSchema = yup.object({
     email: yup
@@ -47,17 +46,25 @@ export const useSignUpPage = () => {
       const password = values.password;
 
       try {
-        await axios.post(signUpUrlAPI, { email, password }).then((response) => {
-          if (response.data) {
-            dispatch(setUser(response.data));
-            navigate(ROUTES.HOME);
-          }
-        });
+        await axios
+          .post(signUpUrlAPI, { email, password })
+          .then((response) => {
+            if (response.data) {
+              dispatch(setUser(response.data));
+              navigate(ROUTES.SIGNIN);
+            } else {
+            }
+          })
+          .catch(function (error) {
+            console.log(error.response.data.message);
+
+            setErrorMessage(error.response.data.message);
+          });
       } catch (error) {
         console.error(error);
       }
     },
   });
 
-  return { formik };
+  return { formik, errorMessage };
 };
