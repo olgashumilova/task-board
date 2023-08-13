@@ -8,6 +8,9 @@ import LandingPageRu from "./language/LandingPage/ru.json";
 import SignInPageEn from "./language/SignInPage/en.json";
 import SignInPageRu from "./language/SignInPage/ru.json";
 
+import SignUpPageEn from "./language/SignUpPage/en.json";
+import SignUpPageRu from "./language/SignUpPage/ru.json";
+
 import FeaturesPageEn from "./language/FeaturesPage/en.json";
 import FeaturesPageRu from "./language/FeaturesPage/ru.json";
 import HeaderEn from "./language/Header/en.json";
@@ -24,6 +27,7 @@ i18n
           header: HeaderRu,
           featuresPage: FeaturesPageRu,
           signInPage: SignInPageRu,
+          signUpPage: SignUpPageRu,
         },
       },
       en: {
@@ -32,6 +36,7 @@ i18n
           header: HeaderEn,
           featuresPage: FeaturesPageEn,
           signInPage: SignInPageEn,
+          signUpPage: SignUpPageEn,
         },
       },
     },

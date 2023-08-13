@@ -32,10 +32,8 @@ function App() {
         <ErrorPage />
       ) : (
         <>
-          {!(window.location.href.indexOf(ROUTES.SIGNUP) !== -1) ? (
-            <HeaderComponent />
-          ) : null}
           <Router>
+            <HeaderComponent />
             <Box
               display={"flex"}
               flexDirection={"column"}

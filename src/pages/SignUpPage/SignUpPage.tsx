@@ -1,29 +1,32 @@
 import { Stack, TextField, Button, Typography, Box } from "@mui/material/";
+import { useTranslation } from "react-i18next";
 import { ROUTES } from "../../routes";
 import { useSignUpPage } from "./useSignUpPage";
+import ErrorMessageBox from "../../components/ErrorMessageBox/ErrorMessageBox";
 
 const SignUpPage = () => {
-  const { formik, errorMessage } = useSignUpPage();
+  const { t } = useTranslation();
+  const { formik, errorMessage, setErrorMessage } = useSignUpPage();
 
   return (
     <>
-      <Button variant="contained" color="success" href={ROUTES.HOME}>
-        На главную
-      </Button>
       <Stack alignItems="center" paddingTop={16} paddingBottom={10}>
-        <Box minWidth={"300px"}>
+        <Box minWidth={"30%"}>
           <form onSubmit={formik.handleSubmit}>
             <Stack spacing={4}>
               <Typography variant="h5" textAlign={"center"}>
-                Регистрация
+                {t("signUpPage.sign_up")}
               </Typography>
               <TextField
                 fullWidth
                 id="email"
                 name="email"
-                label="Электронная почта"
+                label={t("signUpPage.email")}
                 value={formik.values.email}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  setErrorMessage("");
+                }}
                 error={formik.touched.email && Boolean(formik.errors.email)}
                 helperText={formik.touched.email && formik.errors.email}
               />
@@ -31,10 +34,13 @@ const SignUpPage = () => {
                 fullWidth
                 id="password"
                 name="password"
-                label="Пароль"
+                label={t("signUpPage.password")}
                 type="password"
                 value={formik.values.password}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  setErrorMessage("");
+                }}
                 error={
                   formik.touched.password && Boolean(formik.errors.password)
                 }
@@ -44,10 +50,13 @@ const SignUpPage = () => {
                 fullWidth
                 id="repeatPassword"
                 name="repeatPassword"
-                label="Повторите пароль"
+                label={t("signUpPage.repeat_password")}
                 type="password"
                 value={formik.values.repeatPassword}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  setErrorMessage("");
+                }}
                 error={
                   formik.touched.repeatPassword &&
                   Boolean(formik.errors.repeatPassword)
@@ -56,20 +65,14 @@ const SignUpPage = () => {
                   formik.touched.repeatPassword && formik.errors.repeatPassword
                 }
               />
-              {errorMessage && (
-                <Box borderRadius={2} bgcolor={"#ffe6e6"} width={"100%"}>
-                  <Typography color="red" paddingLeft={2}>
-                    {errorMessage}
-                  </Typography>
-                </Box>
-              )}
+              <ErrorMessageBox errorMessage={errorMessage} />
               <Button
                 color="primary"
                 variant="contained"
                 fullWidth
                 type="submit"
               >
-                Зарегистрироваться
+                {t("signUpPage.sign_up")}
               </Button>
             </Stack>
           </form>

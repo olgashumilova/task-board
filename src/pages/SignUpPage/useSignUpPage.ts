@@ -56,8 +56,6 @@ export const useSignUpPage = () => {
             }
           })
           .catch(function (error) {
-            console.log(error.response.data.message);
-
             setErrorMessage(error.response.data.message);
           });
       } catch (error) {
@@ -66,5 +64,5 @@ export const useSignUpPage = () => {
     },
   });
 
-  return { formik, errorMessage };
+  return { formik, errorMessage, setErrorMessage };
 };

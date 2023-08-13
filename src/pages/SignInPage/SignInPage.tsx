@@ -1,10 +1,11 @@
 import { Stack, TextField, Button, Typography, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSignInPage } from "./useSignInPage";
+import ErrorMessageBox from "../../components/ErrorMessageBox/ErrorMessageBox";
 
 const SignInPage = () => {
   const { t } = useTranslation();
-  const { formik } = useSignInPage();
+  const { formik, errorMessage, setErrorMessage } = useSignInPage();
 
   return (
     <Stack alignItems="center" paddingTop={16} paddingBottom={10}>
@@ -20,7 +21,10 @@ const SignInPage = () => {
               name="email"
               label={t("signInPage.email")}
               value={formik.values.email}
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                formik.handleChange(e);
+                setErrorMessage("");
+              }}
               error={formik.touched.email && Boolean(formik.errors.email)}
               helperText={formik.touched.email && formik.errors.email}
             />
@@ -31,10 +35,14 @@ const SignInPage = () => {
               label={t("signInPage.password")}
               type="password"
               value={formik.values.password}
-              onChange={formik.handleChange}
+              onChange={(e) => {
+                formik.handleChange(e);
+                setErrorMessage("");
+              }}
               error={formik.touched.password && Boolean(formik.errors.password)}
               helperText={formik.touched.password && formik.errors.password}
             />
+            <ErrorMessageBox errorMessage={errorMessage} />
             <Button color="primary" variant="contained" fullWidth type="submit">
               {t("signInPage.button")}
             </Button>

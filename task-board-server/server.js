@@ -66,54 +66,30 @@ app.post("/signup", async (req, res) => {
 // Sign in
 app.post(`/signin`, async (req, res) => {
   let { email, password } = req.body;
-  let oldHash = "";
-
-  for (let i = 0; i < arrayOfUsers.length; i++) {
-    oldHash = arrayOfUsers[i].password;
-  }
-
-  const validPassword = await bcrypt.compare(password, oldHash);
-
-  try {
-    if (arrayOfUsers.map((user) => user.isSignedUp).toString() === true) {
-      if (!email && !password) {
-        res.send("Enter data");
-      } else if (email && password) {
-        if (email.length > 8) {
-          res.send("email can'be more than 8 characters");
-        }
-
-        for (let i = 0; i < arrayOfUsers.length; i++) {
-          if (arrayOfUsers[i].email !== email) {
-            res.send("This user doesn't exist");
-          } else if (!validPassword) {
-            res.send("Enter valid password");
-          } else if (validPassword) {
-            res.send(arrayOfUsers[i]);
-            res.sendStatus(200);
-          }
-        }
-      } else if (!email) {
-        res.send("Enter email");
-      } else if (!password) {
-        res.send("Enter password");
-      }
-    } else if (email === "admin" && password === "123admin") {
-      arrayOfUsers.push({
-        id: arrayOfUsers.length,
-        email: email,
-        isSignedUp: true,
-        password: "123admin",
-      });
-      for (let i = 0; i < arrayOfUsers.length; i++) {
-        res.send(arrayOfUsers[i]);
-      }
-    } else {
-      res.send("Sign up first");
-    }
-  } catch (error) {
-    res.send(error);
-  }
 
   if (!req.body) return res.sendStatus(400);
+
+  try {
+    if (arrayOfUsers.map((user) => user.email).includes(email)) {
+      let oldPasswordHash = arrayOfUsers.find(
+        (user) => user.email === email
+      ).password;
+      const isPasswordValid = await bcrypt.compare(password, oldPasswordHash);
+      if (isPasswordValid) {
+        return res
+          .status(200)
+          .send(arrayOfUsers.find((user) => user.email == email));
+      } else {
+        return res.status(400).send({
+          message: "Неправильно введен пароль",
+        });
+      }
+    } else {
+      return res.status(400).send({
+        message: "Данного пользователя не существует",
+      });
+    }
+  } catch (error) {
+    return res.send("Что-то пошло не так").status(400);
+  }
 });
