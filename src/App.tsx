@@ -2,13 +2,7 @@ import theme from "./provider/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import { Box } from "@mui/material";
 
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import HomePage from "./pages/HomePage/HomePage";
 import LandingPage from "./pages/LandingPage/LandindPage";

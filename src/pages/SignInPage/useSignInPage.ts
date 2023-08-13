@@ -10,7 +10,7 @@ import { useFormik } from "formik";
 
 import { signInUrlAPI } from "../../api/api";
 import { ROUTES } from "../../routes";
-import { isSignedIn, getUserProfile } from "../../redux/actions/actions";
+import { setUser } from "../../redux/actions/actions";
 
 export const useSignInPage = () => {
   const { t } = useTranslation();
@@ -45,8 +45,7 @@ export const useSignInPage = () => {
           .post(signInUrlAPI, { email, password })
           .then((response) => {
             if (response.data) {
-              dispatch(isSignedIn(true));
-              dispatch(getUserProfile(response.data));
+              dispatch(setUser(response.data));
               localStorage.setItem("username", response.data.email);
               navigate(ROUTES.HOME);
             }

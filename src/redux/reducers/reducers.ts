@@ -3,12 +3,9 @@ import { IState } from "../../types/types";
 
 export const initialState: IState = {
   boardsCreated: [],
-  userProfile: [],
-  authUser: null,
+  userProfile: null,
   isSignedIn: false,
 };
-
-console.log(initialState);
 
 type TAction = {
   type: string;
@@ -20,7 +17,7 @@ const reducer = (state = initialState, action: TAction): IState => {
     case ACTION_TYPES.SET_USER: {
       return {
         ...state,
-        authUser: action.payload,
+        userProfile: action.payload,
       };
     }
     case ACTION_TYPES.GET_USER_PROFILE: {

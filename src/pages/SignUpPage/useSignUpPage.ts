@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import * as yup from "yup";
 import axios from "axios";
@@ -9,11 +7,8 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { signUpUrlAPI } from "../../api/api";
 import { ROUTES } from "../../routes";
-import { setUser } from "../../redux/actions/actions";
 
 export const useSignUpPage = () => {
-  const { t } = useTranslation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -50,9 +45,7 @@ export const useSignUpPage = () => {
           .post(signUpUrlAPI, { email, password })
           .then((response) => {
             if (response.data) {
-              dispatch(setUser(response.data));
               navigate(ROUTES.SIGNIN);
-            } else {
             }
           })
           .catch(function (error) {
