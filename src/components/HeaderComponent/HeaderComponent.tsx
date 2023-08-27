@@ -16,9 +16,7 @@ const HeaderComponent = () => {
   const { t } = useTranslation();
   const isSmallerThan940 = useMediaQuery("(max-width:940px)");
 
-  const { showRegisterButons, userProfile } = useHeaderComponent();
-  console.log("showRegisterButons", showRegisterButons);
-  console.log("userProfile", userProfile);
+  const { showRegisterButons, userProfile, onSignOut } = useHeaderComponent();
 
   return (
     <Stack
@@ -118,7 +116,7 @@ const HeaderComponent = () => {
               <Typography color={"primary.contrastText"}>
                 Привет, {userProfile?.email}
               </Typography>
-              <Button variant="contained" color="success" href={ROUTES.HOME}>
+              <Button variant="contained" color="success" onClick={onSignOut}>
                 Выход
               </Button>
             </Stack>

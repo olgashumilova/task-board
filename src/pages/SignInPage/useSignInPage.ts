@@ -46,7 +46,6 @@ export const useSignInPage = () => {
           .then((response) => {
             if (response.data) {
               dispatch(setUser(response.data));
-              localStorage.setItem("username", response.data.email);
               navigate(ROUTES.HOME);
             }
           })

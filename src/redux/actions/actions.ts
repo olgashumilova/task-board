@@ -1,17 +1,12 @@
 import ACTION_TYPES from "../const/actionTypes";
-import {
-  IUserProfile,
-  TSetUser,
-  TGetUser,
-  TIsSignedIn,
-} from "../../types/types";
+import { IUserProfile, TSetUser, TGetUser } from "../../types/types";
 
 // Users actions________________________________________________________________________________________________
 
-export const setUser = (payload: IUserProfile): TSetUser => {
+export const setUser = (payload: any): TSetUser => {
   return {
     type: ACTION_TYPES.SET_USER,
-    payload: { ...payload },
+    payload: payload,
   };
 };
 
@@ -21,8 +16,3 @@ export const getUserProfile = (payload: IUserProfile): TGetUser => {
     payload: { ...payload },
   };
 };
-
-export const isSignedIn = (payload: boolean): TIsSignedIn => ({
-  type: ACTION_TYPES.IS_SIGNED_IN,
-  payload: payload,
-});

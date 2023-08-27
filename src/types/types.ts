@@ -9,15 +9,14 @@ export interface IUserProfile {
 
 export interface IState {
   boardsCreated: [];
-  userProfile: null | IUserProfile;
-  isSignedIn: boolean;
+  userProfile: IUserProfile | null;
 }
 
 // Actions
 
 export type TSetUser = {
   type: string;
-  payload: IUserProfile;
+  payload: IUserProfile | null;
 };
 
 export type TGetUser = {
@@ -25,14 +24,9 @@ export type TGetUser = {
   payload: IUserProfile;
 };
 
-export type TIsSignedIn = {
-  type: string;
-  payload: boolean;
-};
-
-export type TLoginSuccessAction = {
+export type TRemoveUserProfile = {
   type: string;
   payload: IUserProfile;
 };
 
-export type TActions = TSetUser | TGetUser | TIsSignedIn | TLoginSuccessAction;
+export type TActions = TSetUser | TGetUser | TRemoveUserProfile;
